@@ -1,4 +1,6 @@
+import random
 from random import randint
+
 
 # MonteCarlo.py
 # This program uses a Monte Carlo approach to estimate the probability of winning the dice game "Approach" with different
@@ -21,22 +23,40 @@ from random import randint
 
 # n is the limit.
 
-def monte_carlo_approach(n) :
+def monte_carlo_approach(n):
     win_table = {}
-    for i in range(n-5,n+1) :
+    for i in range(n - 5, n + 1):
         win_table[i] = 0
 
-    for hold_val in (n-5,n+1) :
-        for i in range(100000) :
-        ## you do this part. My solution is under 20 lines of code. Yours can be longer, but if it's getting
-        ## really big, take a step back and rethink.
+    for hold_val in (n - 5, n + 1):
+        for i in range(100000):
+            ## you do this part. My solution is under 20 lines of code. Yours can be longer, but if it's getting
+            ## really big, take a step back and rethink.
 
-        ## player 1 plays
+            ## player 1 plays
+            playerOneScore = 0
+            while playerOneScore <= hold_val:
+                plays = random.randint(1, 6)
+                playerOneScore += plays
+                if playerOneScore > hold_val:
+                    break
 
+            if playerOneScore > n:
+                continue
 
-        ## player 1 done. Did they exceed n?
-        ## if not, player 2 plays
-        ## player 2 > player1?
+            playerTwoScore = 0
+            while playerTwoScore <= hold_val:
+                plays2 = random.randint(1, 6)
+                playerTwoScore += plays2
+                if playerTwoScore > hold_val:
+                    break
 
-    for item in win_table.keys() :
-        print("%d: %f" % (item, win_table[item]/1000000))
+            if playerTwoScore > n or playerOneScore >= playerTwoScore:
+                win_table[hold_val] += 1
+
+            ## player 1 done. Did they exceed n?
+            ## if not, player 2 plays
+            ## player 2 > player1?
+
+    for item in win_table.keys():
+        print("%d: %f" % (item, win_table[item] / 1000000))
