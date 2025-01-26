@@ -1,19 +1,49 @@
 import sys
-
+from random import random
 ## ZeroR - our first learning algorithm.
 ### assume that list_of_examples is a list of strings. For example:
 ### ['outlook,temperature,humidity,windy,play\n', 'sunny,hot,high,FALSE,no\n', 'sunny,hot,high,TRUE,no\n', 'overcast,hot,high,FALSE,yes\n', 'rainy,mild,high,FALSE,yes\n', 'rainy,cool,normal,FALSE,yes\n', 'rainy,cool,normal,TRUE,no\n', 'overcast,cool,normal,TRUE,yes\n', 'sunny,mild,high,FALSE,no\n', 'sunny,cool,normal,FALSE,yes\n', 'rainy,mild,normal,FALSE,yes\n', 'sunny,mild,normal,TRUE,yes\n', 'overcast,mild,high,TRUE,yes\n', 'overcast,hot,normal,FALSE,yes\n', 'rainy,mild,high,TRUE,no\n']
 ### your code should get the last element in each string, which is the classification, and return the most common one.
 
 def zeroR(list_of_examples) :
-    return "zeroR" # you fix this.
+    yesCount = 0
+    totalCount = 0
+    for line in list_of_examples[1:]:
+        choice = line.strip().split(",")[-1]
+        if choice == "yes":
+            yesCount+=1
+        totalCount+=1
+    if yesCount > (totalCount/2):
+        return "yes"
+    else:
+        return "no"
+    #return "zeroR" # you fix this.
 
 ### assume that list_of_examples is a list of strings. For example:
 ### ['outlook,temperature,humidity,windy,play\n', 'sunny,hot,high,FALSE,no\n', 'sunny,hot,high,TRUE,no\n', 'overcast,hot,high,FALSE,yes\n', 'rainy,mild,high,FALSE,yes\n', 'rainy,cool,normal,FALSE,yes\n', 'rainy,cool,normal,TRUE,no\n', 'overcast,cool,normal,TRUE,yes\n', 'sunny,mild,high,FALSE,no\n', 'sunny,cool,normal,FALSE,yes\n', 'rainy,mild,normal,FALSE,yes\n', 'sunny,mild,normal,TRUE,yes\n', 'overcast,mild,high,TRUE,yes\n', 'overcast,hot,normal,FALSE,yes\n', 'rainy,mild,high,TRUE,no\n']
 ### your code should get the last element in each string, which is the classification, and use random.choice() to select one and return it
 
 def randR(list_of_examples) :
-    return "randR" # you fix this.
+    yesCount = 0
+    totalCount = 0
+    for line in list_of_examples[1:]:
+        choice = line.strip().split(",")[-1]
+        if choice == "yes":
+            yesCount += 1
+        totalCount += 1
+    choiceNum = random.randint(1,11)
+    if choiceNum>4:
+        if yesCount>(totalCount/2):
+            return "yes"
+        else:
+            return "no"
+    else:
+        if yesCount<(totalCount/2):
+            return "yes"
+        else:
+            return "no"
+
+    #return "randR" # you fix this.
 
 
 
